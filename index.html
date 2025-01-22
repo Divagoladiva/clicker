@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicker Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="counter">0</div>
+<img id="rotating-image" src="https://via.placeholder.com/150" alt="Rotating Image" onclick="incrementCounter()">
+
+<script>
+    let counter = 0;
+
+    function incrementCounter() {
+        counter++;
+        document.getElementById('counter').textContent = counter;
+    }
+</script>
+
+</body>
+</html>
