@@ -111,13 +111,21 @@
         }
     }
 
-    // Fonction pour mettre à jour l'UI des outils (disponibilité)
+    // Fonction pour mettre à jour l'UI des outils (disponibilité et couleur du texte)
     function updateTools() {
         tools.forEach(tool => {
             const toolElement = document.getElementById(`tool-${tool.id}`);
+
             // Afficher l'outil 2 dès que le joueur a plus de 50 pièces
             if (counter >= 50 && tool.id === 2 && toolElement.style.display === 'none') {
                 toolElement.style.display = 'block'; // Afficher l'outil 2
+            }
+
+            // Afficher la couleur rouge si l'utilisateur peut acheter l'outil
+            if (counter >= tool.price) {
+                toolElement.querySelector('p').style.color = 'red'; // Texte en rouge si l'outil est achetable
+            } else {
+                toolElement.querySelector('p').style.color = ''; // Retirer la couleur rouge si l'outil n'est pas achetable
             }
 
             if (counter >= tool.price && tool.id !== 2) {
