@@ -1,28 +1,29 @@
 body {
     margin: 0;
-    height: 100vh; /* Assure une hauteur de 100% pour la page */
-    display: flex; /* Active le mode flexbox */
-    justify-content: center; /* Centre horizontalement */
-    align-items: center; /* Centre verticalement */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: Arial, sans-serif;
     overflow: hidden;
+    position: relative;
 }
 
 #counter {
     position: absolute;
     top: 10px;
     left: 10px;
-    font-size: 32px; /* Taille augmentée */
+    font-size: 32px;
     font-weight: bold;
     color: #333;
 }
 
 #rotating-image {
-    width: 200px; /* Taille augmentée */
-    height: 200px; /* Taille augmentée */
+    width: 200px;
+    height: 200px;
     cursor: pointer;
-    animation: rotate 2s linear infinite; /* Animation continue */
-}
+    animation: rotate 10s linear infinite; /* Rotation lente (10s par tour) */\n    transition: transform 0.1s ease; /* Transition fluide pour le clic */\n}
 
 @keyframes rotate {
     from {
