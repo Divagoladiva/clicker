@@ -23,7 +23,7 @@ body {
     width: 200px;
     height: 200px;
     cursor: pointer;
-    animation: rotate 10s linear infinite; /* Rotation lente (10s par tour) */\n    transition: transform 0.1s ease; /* Transition fluide pour le clic */\n}
+    animation: rotate 30s linear infinite; /* Rotation lente (10s par tour) */\n    transition: transform 0.1s ease; /* Transition fluide pour le clic */\n}
 
 @keyframes rotate {
     from {
