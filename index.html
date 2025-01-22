@@ -128,7 +128,8 @@
                 toolElement.querySelector('p').style.color = ''; // Retirer la couleur rouge si l'outil n'est pas achetable
             }
 
-            if (counter >= tool.price && tool.id !== 2) {
+            // Afficher les outils disponibles (s'ils sont achetables)
+            if (counter >= tool.price) {
                 toolElement.style.filter = 'none'; // L'outil est disponible
             } else {
                 toolElement.style.filter = 'grayscale(100%)'; // L'outil n'est pas disponible
