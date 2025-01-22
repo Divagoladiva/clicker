@@ -8,7 +8,7 @@ body {
     position: absolute;
     top: 10px;
     left: 10px;
-    font-size: 24px;
+    font-size: 32px; /* Taille augmentée */ 
     font-weight: bold;
     color: #333;
 }
@@ -18,8 +18,8 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(0deg);
-    width: 150px;
-    height: 150px;
+    width: 200px; /* Taille augmentée */ 
+    height: 200px; /* Taille augmentée */
     cursor: pointer;
     animation: rotate 2s linear infinite;
 }
