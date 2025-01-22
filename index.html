@@ -12,28 +12,42 @@
 <img id="rotating-image" src="https://media.discordapp.net/attachments/859324115961905185/1331651642130694246/New_Piskel_20.png?ex=679264bc&is=6791133c&hm=28e9d4ee17ae106a3a358940b82f3206a7b5a74ecf433b017521aadda9ca6de6&=&format=webp&quality=lossless" alt="Rotating Image" onclick="incrementCounter()">
 
 <div id="tools-container">
+    <!-- Outil 1 -->
     <div class="tool" id="tool-1" onclick="buyTool(1)">
         <p>+1 Click per Click</p>
         <p>Price: <span id="tool-1-price">10</span></p>
+    </div>
+
+    <!-- Outil 2 -->
+    <div class="tool" id="tool-2" onclick="buyTool(2)">
+        <p>+1 Click per Second</p>
+        <p>Price: <span id="tool-2-price">50</span></p>
     </div>
 </div>
 
 <script>
     let counter = 0;
     let clickPower = 1;
+    let clickPerSecond = 0; // Pour le deuxième outil
     let tools = [
         {
             id: 1,
             price: 10,
             effect: 1, // +1 click per click
+        },
+        {
+            id: 2,
+            price: 50,
+            effect: 1, // +1 click per second
         }
     ];
 
+    // Fonction pour augmenter le compteur à chaque clic
     function incrementCounter() {
         counter += clickPower;
         document.getElementById('counter').textContent = counter;
 
-        // Add the +1 animation
+        // Ajouter l'animation +1
         const plusOne = document.createElement('div');
         plusOne.textContent = `+${clickPower}`;
         plusOne.style.position = 'absolute';
@@ -44,7 +58,7 @@
         plusOne.style.transition = 'opacity 1s ease, transform 1s ease';
         plusOne.style.opacity = '1';
 
-        // Random position near the image
+        // Position aléatoire autour de l'image
         const image = document.getElementById('rotating-image');
         const rect = image.getBoundingClientRect();
         plusOne.style.left = `${rect.left + Math.random() * rect.width}px`;
@@ -52,41 +66,54 @@
 
         document.body.appendChild(plusOne);
 
-        // Animate the +1 and remove it after animation
         setTimeout(() => {
             plusOne.style.opacity = '0';
             plusOne.style.transform = 'translateY(-20px)';
             setTimeout(() => plusOne.remove(), 1000);
         }, 0);
 
-        // Update tools UI
+        // Mettre à jour l'UI des outils
         updateTools();
     }
 
+    // Fonction pour acheter un outil
     function buyTool(toolId) {
         const tool = tools.find(t => t.id === toolId);
 
         if (counter >= tool.price) {
             counter -= tool.price;
-            clickPower += tool.effect;
-            tool.price = Math.floor(tool.price * 1.2); // Increase price by 20%
+            if (tool.id === 1) {
+                clickPower += tool.effect; // Augmente les clics par clic
+            } else if (tool.id === 2) {
+                clickPerSecond += tool.effect; // Augmente les clics par seconde
+            }
 
-            document.getElementById('tool-1-price').textContent = tool.price;
+            // Augmenter le prix de l'outil après chaque achat
+            tool.price = Math.floor(tool.price * 1.5); // Inflation plus importante (x1.5)
+            document.getElementById(`tool-${tool.id}-price`).textContent = tool.price;
             document.getElementById('counter').textContent = counter;
+
             updateTools();
         }
     }
 
+    // Fonction pour mettre à jour l'UI des outils (disponibilité)
     function updateTools() {
         tools.forEach(tool => {
             const toolElement = document.getElementById(`tool-${tool.id}`);
             if (counter >= tool.price) {
-                toolElement.style.filter = 'none'; // Tool is available
+                toolElement.style.filter = 'none'; // L'outil est disponible
             } else {
-                toolElement.style.filter = 'grayscale(100%)'; // Tool is not available
+                toolElement.style.filter = 'grayscale(100%)'; // L'outil n'est pas disponible
             }
         });
     }
+
+    // Fonction pour ajouter des clics par seconde
+    setInterval(() => {
+        counter += clickPerSecond;
+        document.getElementById('counter').textContent = counter;
+    }, 1000);
 </script>
 
 </body>
