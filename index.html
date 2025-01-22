@@ -22,7 +22,7 @@
         <p>Price: <span id="tool-1-price">10</span></p>
     </div>
 
-    <!-- Outil 2 (initialement caché) -->
+    <!-- Outil 2 (initialement caché, mais sera visible après achat) -->
     <div class="tool" id="tool-2" style="display: none;" onclick="buyTool(2)">
         <p>+1 Click per Second</p>
         <p>Price: <span id="tool-2-price">50</span></p>
@@ -97,6 +97,11 @@
             document.getElementById(`tool-${tool.id}-price`).textContent = tool.price;
             document.getElementById('counter').textContent = counter;
 
+            // Si l'outil est le deuxième, le rendre visible une fois acheté
+            if (tool.id === 2) {
+                document.getElementById('tool-2').style.display = 'block'; // Afficher l'outil 2 une fois acheté
+            }
+
             updateTools();
         }
     }
@@ -105,14 +110,10 @@
     function updateTools() {
         tools.forEach(tool => {
             const toolElement = document.getElementById(`tool-${tool.id}`);
-            if (counter >= tool.price) {
+            if (counter >= tool.price && tool.id !== 2) {
                 toolElement.style.filter = 'none'; // L'outil est disponible
-                toolElement.style.display = 'block'; // Afficher l'outil s'il est disponible
             } else {
                 toolElement.style.filter = 'grayscale(100%)'; // L'outil n'est pas disponible
-                if (tool.id === 2) {
-                    toolElement.style.display = 'none'; // Cacher l'outil 2 si pas encore acheté
-                }
             }
         });
     }
