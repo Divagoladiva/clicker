@@ -22,7 +22,7 @@
         <p>Price: <span id="tool-1-price">10</span></p>
     </div>
 
-    <!-- Outil 2 (initialement caché, mais sera visible après achat) -->
+    <!-- Outil 2 (initialement caché, mais sera visible après avoir 50 pièces) -->
     <div class="tool" id="tool-2" style="display: none;" onclick="buyTool(2)">
         <p>+1 Click per Second</p>
         <p>Price: <span id="tool-2-price">50</span></p>
@@ -102,9 +102,9 @@
             document.getElementById(`tool-${tool.id}-price`).textContent = tool.price;
             document.getElementById('counter').textContent = counter;
 
-            // Si l'outil est le deuxième, le rendre visible une fois acheté
+            // Si l'outil est le deuxième, il devient visible quand le joueur a 50 pièces
             if (tool.id === 2) {
-                document.getElementById('tool-2').style.display = 'block'; // Afficher l'outil 2 une fois acheté
+                document.getElementById('tool-2').style.display = 'block'; // Afficher l'outil 2 une fois que le joueur a assez de pièces
             }
 
             updateTools();
@@ -115,6 +115,11 @@
     function updateTools() {
         tools.forEach(tool => {
             const toolElement = document.getElementById(`tool-${tool.id}`);
+            // Afficher l'outil 2 dès que le joueur a plus de 50 pièces
+            if (counter >= 50 && tool.id === 2 && toolElement.style.display === 'none') {
+                toolElement.style.display = 'block'; // Afficher l'outil 2
+            }
+
             if (counter >= tool.price && tool.id !== 2) {
                 toolElement.style.filter = 'none'; // L'outil est disponible
             } else {
