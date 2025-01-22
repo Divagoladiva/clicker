@@ -29,6 +29,11 @@
     </div>
 </div>
 
+<!-- Champ de texte en bas à gauche pour tester le compteur -->
+<div id="input-container">
+    <input type="number" id="text-input" placeholder="Enter number">
+</div>
+
 <script>
     let counter = 0;
     let clickPower = 1;
@@ -123,6 +128,18 @@
         counter += clickPerSecond;
         document.getElementById('counter').textContent = counter;
     }, 1000);
+
+    // Fonction pour ajouter un nombre au compteur via le champ de texte
+    document.getElementById('text-input').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            const inputValue = parseInt(document.getElementById('text-input').value);
+            if (!isNaN(inputValue)) {
+                counter += inputValue; // Ajouter le nombre entré au compteur
+                document.getElementById('counter').textContent = counter;
+                document.getElementById('text-input').value = ''; // Réinitialiser le champ de texte
+            }
+        }
+    });
 </script>
 
 </body>
