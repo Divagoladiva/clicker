@@ -8,6 +8,8 @@ body {
     font-family: Arial, sans-serif;
     overflow: hidden;
     position: relative;
+    flex-direction: column; /* Ajouter cette ligne pour empiler les éléments verticalement */
+    text-align: center;
 }
 
 #counter {
@@ -23,7 +25,46 @@ body {
     width: 200px;
     height: 200px;
     cursor: pointer;
-    animation: rotate 30s linear infinite; /* Rotation lente (10s par tour) */\n    transition: transform 0.1s ease; /* Transition fluide pour le clic */\n}
+    animation: rotate 30s linear infinite;
+    transition: transform 0.1s ease;
+}
+
+#tools-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Grille réactive pour les outils */
+    gap: 20px; /* Espacement entre les outils */
+    margin-top: 20px;
+    width: 100%;
+    max-width: 800px; /* Limite la largeur maximale des outils */
+    padding: 20px;
+}
+
+.tool {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tool:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.tool p {
+    margin: 10px 0;
+}
+
+.tool p:first-child {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.tool p span {
+    color: #d9534f; /* Couleur rouge pour le prix */
+}
 
 @keyframes rotate {
     from {
