@@ -1,34 +1,34 @@
 body {
     margin: 0;
-    overflow: hidden;
+    height: 100vh; /* Assure une hauteur de 100% pour la page */
+    display: flex; /* Active le mode flexbox */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
     font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
 #counter {
     position: absolute;
     top: 10px;
     left: 10px;
-    font-size: 32px; /* Taille augmentée */ 
+    font-size: 32px; /* Taille augmentée */
     font-weight: bold;
     color: #333;
 }
 
 #rotating-image {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(0deg);
-    width: 200px; /* Taille augmentée */ 
+    width: 200px; /* Taille augmentée */
     height: 200px; /* Taille augmentée */
     cursor: pointer;
-    animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite; /* Animation continue */
 }
 
 @keyframes rotate {
     from {
-        transform: translate(-50%, -50%) rotate(0deg);
+        transform: rotate(0deg);
     }
     to {
-        transform: translate(-50%, -50%) rotate(360deg);
+        transform: rotate(360deg);
     }
 }
