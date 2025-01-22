@@ -11,16 +11,31 @@
 <div id="counter">0</div>
 <img id="rotating-image" src="https://media.discordapp.net/attachments/859324115961905185/1331651642130694246/New_Piskel_20.png?ex=679264bc&is=6791133c&hm=28e9d4ee17ae106a3a358940b82f3206a7b5a74ecf433b017521aadda9ca6de6&=&format=webp&quality=lossless" alt="Rotating Image" onclick="incrementCounter()">
 
+<div id="tools-container">
+    <div class="tool" id="tool-1" onclick="buyTool(1)">
+        <p>+1 Click per Click</p>
+        <p>Price: <span id="tool-1-price">10</span></p>
+    </div>
+</div>
+
 <script>
     let counter = 0;
+    let clickPower = 1;
+    let tools = [
+        {
+            id: 1,
+            price: 10,
+            effect: 1, // +1 click per click
+        }
+    ];
 
     function incrementCounter() {
-        counter++;
+        counter += clickPower;
         document.getElementById('counter').textContent = counter;
 
         // Add the +1 animation
         const plusOne = document.createElement('div');
-        plusOne.textContent = '+1';
+        plusOne.textContent = `+${clickPower}`;
         plusOne.style.position = 'absolute';
         plusOne.style.color = 'rgba(0, 0, 0, 0.5)';
         plusOne.style.fontSize = '24px';
@@ -44,9 +59,33 @@
             setTimeout(() => plusOne.remove(), 1000);
         }, 0);
 
-        // Add the grow/shrink animation to the image
-        image.style.transform = 'scale(1.2)';
-        setTimeout(() => image.style.transform = 'scale(1)', 100);
+        // Update tools UI
+        updateTools();
+    }
+
+    function buyTool(toolId) {
+        const tool = tools.find(t => t.id === toolId);
+
+        if (counter >= tool.price) {
+            counter -= tool.price;
+            clickPower += tool.effect;
+            tool.price = Math.floor(tool.price * 1.2); // Increase price by 20%
+
+            document.getElementById('tool-1-price').textContent = tool.price;
+            document.getElementById('counter').textContent = counter;
+            updateTools();
+        }
+    }
+
+    function updateTools() {
+        tools.forEach(tool => {
+            const toolElement = document.getElementById(`tool-${tool.id}`);
+            if (counter >= tool.price) {
+                toolElement.style.filter = 'none'; // Tool is available
+            } else {
+                toolElement.style.filter = 'grayscale(100%)'; // Tool is not available
+            }
+        });
     }
 </script>
 
