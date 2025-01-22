@@ -11,6 +11,10 @@
 <div id="counter">0</div>
 <img id="rotating-image" src="https://media.discordapp.net/attachments/859324115961905185/1331651642130694246/New_Piskel_20.png?ex=679264bc&is=6791133c&hm=28e9d4ee17ae106a3a358940b82f3206a7b5a74ecf433b017521aadda9ca6de6&=&format=webp&quality=lossless" alt="Rotating Image" onclick="incrementCounter()">
 
+<!-- Titre des améliorations -->
+<div id="tools-title">Améliorations</div>
+
+<!-- Boîte à outils (Toolbox) -->
 <div id="tools-container">
     <!-- Outil 1 -->
     <div class="tool" id="tool-1" onclick="buyTool(1)">
@@ -18,8 +22,8 @@
         <p>Price: <span id="tool-1-price">10</span></p>
     </div>
 
-    <!-- Outil 2 -->
-    <div class="tool" id="tool-2" onclick="buyTool(2)">
+    <!-- Outil 2 (initialement caché) -->
+    <div class="tool" id="tool-2" style="display: none;" onclick="buyTool(2)">
         <p>+1 Click per Second</p>
         <p>Price: <span id="tool-2-price">50</span></p>
     </div>
@@ -103,8 +107,12 @@
             const toolElement = document.getElementById(`tool-${tool.id}`);
             if (counter >= tool.price) {
                 toolElement.style.filter = 'none'; // L'outil est disponible
+                toolElement.style.display = 'block'; // Afficher l'outil s'il est disponible
             } else {
                 toolElement.style.filter = 'grayscale(100%)'; // L'outil n'est pas disponible
+                if (tool.id === 2) {
+                    toolElement.style.display = 'none'; // Cacher l'outil 2 si pas encore acheté
+                }
             }
         });
     }
