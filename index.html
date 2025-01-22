@@ -9,7 +9,7 @@
 <body>
 
 <div id="counter">0</div>
-<img id="rotating-image" src="https://media.discordapp.net/attachments/859324115961905185/1331651642130694246/New_Piskel_20.png?ex=679264bc&is=6791133c&hm=28e9d4ee17ae106a3a358940b82f3206a7b5a74ecf433b017521aadda9ca6de6&=&format=webp&quality=lossless" alt="Rotating Image" onclick="incrementCounter()">
+<img id="rotating-image" src="https://via.placeholder.com/200" alt="Rotating Image" onclick="incrementCounter()">
 
 <script>
     let counter = 0;
@@ -17,6 +17,36 @@
     function incrementCounter() {
         counter++;
         document.getElementById('counter').textContent = counter;
+
+        // Add the +1 animation
+        const plusOne = document.createElement('div');
+        plusOne.textContent = '+1';
+        plusOne.style.position = 'absolute';
+        plusOne.style.color = 'rgba(0, 0, 0, 0.5)';
+        plusOne.style.fontSize = '24px';
+        plusOne.style.fontWeight = 'bold';
+        plusOne.style.pointerEvents = 'none';
+        plusOne.style.transition = 'opacity 1s ease, transform 1s ease';
+        plusOne.style.opacity = '1';
+
+        // Random position near the image
+        const image = document.getElementById('rotating-image');
+        const rect = image.getBoundingClientRect();
+        plusOne.style.left = `${rect.left + Math.random() * rect.width}px`;
+        plusOne.style.top = `${rect.top + Math.random() * rect.height}px`;
+
+        document.body.appendChild(plusOne);
+
+        // Animate the +1 and remove it after animation
+        setTimeout(() => {
+            plusOne.style.opacity = '0';
+            plusOne.style.transform = 'translateY(-20px)';
+            setTimeout(() => plusOne.remove(), 1000);
+        }, 0);
+
+        // Add the grow/shrink animation to the image
+        image.style.transform = 'scale(1.2)';
+        setTimeout(() => image.style.transform = 'scale(1)', 100);
     }
 </script>
 
